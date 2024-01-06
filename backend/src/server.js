@@ -1,5 +1,6 @@
 import express from "express";
 import "dotenv/config.js";
+import cors from 'cors';
 
 import errorHandler from "./middleware/errorHandler.js";
 import connectDB from "./utils/connectDB.js";
@@ -12,6 +13,7 @@ const port = process.env.PORT | 8080;
 createUploadsDir();
 connectDB();
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 app.use(express.static(process.env.STORAGE));

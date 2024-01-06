@@ -17,7 +17,7 @@ const postAddArticle = asyncHandler(async (req, res) => {
   const article = {
     title,
     content,
-    image: imageFile.path,
+    image: imageFile.filename,
     description,
     author: new mongoose.Types.ObjectId(authorId),
   };
@@ -93,7 +93,7 @@ const deleteArticle = asyncHandler(async (req, res) => {
   }
 });
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 4;
 
 const getArticles = asyncHandler(async (req, res) => {
   const page = req.query.page ? Number(req.query.page) : 1;
@@ -102,7 +102,7 @@ const getArticles = asyncHandler(async (req, res) => {
   try {
     const articles = await Article.find()
       .sort({ dateAdded: -1 })
-      .skip(skip)
+      .skip(skip + 1)
       .limit(PAGE_SIZE)
       .populate({
         path: "author",
@@ -113,10 +113,28 @@ const getArticles = asyncHandler(async (req, res) => {
     const total = await Article.countDocuments();
 
     res.status(200);
-    res.json({ articles, total, page });
+    res.json({ articles, total: Math.ceil(total / PAGE_SIZE), page });
   } catch (error) {
     handleDbErrors(error, res);
   }
 });
 
-export { postAddArticle, putUpdateArticle, deleteArticle, getArticles };
+const getLastArticle = asyncHandler(async (req, res) => {
+  try {
+    const lastArticle = await Article.findOne()
+      .select("-content -author")
+      .sort({ dateAdded: -1 });
+    res.status(200);
+    res.json(lastArticle);
+  } catch (error) {
+    handleDbErrors(error);
+  }
+});
+
+export {
+  postAddArticle,
+  putUpdateArticle,
+  deleteArticle,
+  getArticles,
+  getLastArticle,
+};
