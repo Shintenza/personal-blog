@@ -3,15 +3,11 @@ import asyncHandler from "express-async-handler";
 import User from "../models/User.js";
 
 const articleAuth = asyncHandler(async (req, res, next) => {
-  let token = "";
+  let token = req.cookies.token || null;
   let user = null;
 
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
+  if (token) {
     try {
-      token = req.headers.authorization.split(" ")[1];
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
       user = await User.findById(decodedToken.userId).select("-password");

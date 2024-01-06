@@ -136,10 +136,26 @@ const getLastArticle = asyncHandler(async (req, res) => {
   }
 });
 
+const getArticle = asyncHandler(async (req, res) => {
+  const articleId = req.params.id;
+  if (!articleId) {
+    res.status(400);
+    throw new Error("missing article id");
+  }
+  try {
+    const article = await Article.findById(articleId).select("-description");
+    res.status(200);
+    res.json(article);
+  } catch (error) {
+    handleDbErrors(error, res);
+  }
+});
+
 export {
   postAddArticle,
   putUpdateArticle,
   deleteArticle,
   getArticles,
   getLastArticle,
+  getArticle,
 };
