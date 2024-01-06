@@ -1,6 +1,7 @@
 import express from "express";
 import "dotenv/config.js";
-import cors from 'cors';
+import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import errorHandler from "./middleware/errorHandler.js";
 import connectDB from "./utils/connectDB.js";
@@ -13,9 +14,16 @@ const port = process.env.PORT | 8080;
 createUploadsDir();
 connectDB();
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+    preflightContinue: true,
+  }),
+);
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.static(process.env.STORAGE));
 
 app.use("/user", userRoutes);

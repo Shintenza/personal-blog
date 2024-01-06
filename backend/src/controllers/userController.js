@@ -40,7 +40,7 @@ const postRegister = asyncHandler(async (req, res) => {
       ...response,
     });
   } catch (error) {
-    handleDbErrors(error, res)
+    handleDbErrors(error, res);
   }
 });
 
@@ -54,6 +54,11 @@ const postLogin = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email });
   if (user && (await bcrypt.compare(password, user.password))) {
+    const token = generateToken(user.id, user.role);
+    res.cookie("token", token, {
+      maxAge: 10 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    });
     res.status(200);
     res.json({
       _id: user.id,
@@ -61,7 +66,7 @@ const postLogin = asyncHandler(async (req, res) => {
       lastName: user.lastName,
       username: user.username,
       role: user.role,
-      token: generateToken(user.id, user.role),
+      token,
     });
   } else {
     res.status(400);
