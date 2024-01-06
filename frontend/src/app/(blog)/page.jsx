@@ -5,10 +5,13 @@ import { unstable_noStore as noStore } from "next/cache";
 import Pagination from "@components/Pagination";
 import Search from "@components/Search";
 
-const getArticles = async (currentPage) => {
+const getArticles = async (currentPage, searchQuery) => {
   noStore();
+  const params = new URLSearchParams();
+  params.set("page", currentPage);
+  params.set("query", searchQuery);
   const respone = await fetch(
-    `${process.env.BACKEND_URL}/article?page=${currentPage}`,
+    `${process.env.BACKEND_URL}/article?${params.toString()}`,
   );
 
   const responseBody = await respone.json();
@@ -17,9 +20,12 @@ const getArticles = async (currentPage) => {
 
 const Home = async ({ searchParams }) => {
   const currentPage = Number(searchParams.page) || 1;
+  const searchQuery = searchParams.query || "";
 
-  const { articles, total: totalNumberOfPages } =
-    await getArticles(currentPage);
+  const { articles, total: totalNumberOfPages } = await getArticles(
+    currentPage,
+    searchQuery,
+  );
   return (
     <main className="page_padding">
       <LastArticle />
