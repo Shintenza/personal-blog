@@ -98,11 +98,16 @@ const PAGE_SIZE = 4;
 const getArticles = asyncHandler(async (req, res) => {
   const page = req.query.page ? Number(req.query.page) : 1;
   const skip = (page - 1) * PAGE_SIZE;
+  const searchQuery = req.query.query || "";
 
   try {
-    const articles = await Article.find()
+    const articles = await Article.find(
+      searchQuery.length > 0
+        ? { title: { $regex: searchQuery, $options: "i" } }
+        : {},
+    )
       .sort({ dateAdded: -1 })
-      .skip(skip + 1)
+      .skip(searchQuery.length > 0 ? 0 : skip + 1)
       .limit(PAGE_SIZE)
       .populate({
         path: "author",
