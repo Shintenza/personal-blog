@@ -9,6 +9,7 @@ const ArticleGrid = ({ articles }) => {
           description={article.description}
           image={article.image}
           dateAdded={article.dateAdded}
+          articleId={article._id}
           key={index}
         />
       ))}
