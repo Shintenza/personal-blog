@@ -58,7 +58,9 @@ const Header = () => {
   return (
     <nav>
       <div className="page_padding flex justify-between items-center mt-8 mb-10">
-        <h1 className="text-9xl font-bold">Blog.</h1>
+        <Link href="/">
+          <h1 className="text-9xl font-bold">Blog.</h1>
+        </Link>
         <div className="">
           <ul className="peer gap-4 hidden active md:flex items-center">
             {returnNavigationItems()}
@@ -94,8 +96,12 @@ const Header = () => {
 
               {userData ? (
                 <>
-                  <Link href="/" className="text-black">Add an article</Link>
-                  <Link href="/" className="text-black">My Articles</Link>
+                  <Link href="/add" className="text-black">
+                    Add an article
+                  </Link>
+                  <Link href="/" className="text-black">
+                    My Articles
+                  </Link>
                   <button
                     onClick={() => {
                       setUserData(null);

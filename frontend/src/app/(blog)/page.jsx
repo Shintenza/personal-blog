@@ -1,6 +1,5 @@
 import ArticleGrid from "@components/ArticleGrid";
 import LastArticle from "@components/LastArticle";
-import Image from "next/image";
 import { unstable_noStore as noStore } from "next/cache";
 import Pagination from "@components/Pagination";
 import Search from "@components/Search";

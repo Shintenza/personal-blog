@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors: {
         c_gray: "#181A1B",
-        c_gray_lighter: "#303030",
+        c_gray_lighter: "#1f2021",
       },
     },
   },

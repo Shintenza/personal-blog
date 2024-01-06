@@ -1,0 +1,7 @@
+.article_area {
+  @apply bg-c_gray_lighter p-3 border-b-2 border-solid border-white resize-y
+}
+
+.article_input {
+  @apply bg-c_gray_lighter focus:outline-none border-b-2 border-solid border-white p-4
+}

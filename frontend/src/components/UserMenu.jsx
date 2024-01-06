@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 
 const UserMenu = ({ userAvatar, setUserData }) => {
@@ -31,16 +32,21 @@ const UserMenu = ({ userAvatar, setUserData }) => {
         className="w-[64px] h-[64px] relative"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <Image src={userAvatar} fill className="rounded-full" alt="user logo"/>
+        <Image src={userAvatar} fill className="rounded-full" alt="user logo" />
       </button>
 
       <div
         ref={dropdownRef}
         className={`${!isOpen && "hidden"
-          } absolute mt-2 p-8 bg-c_gray_lighter z-10 w-64 right-0 flex flex-col gap-4 bg-white text-black`}
+          } absolute mt-2 p-8 bg-c_gray_lighter z-10 w-64 right-0 flex flex-col items-center gap-4 bg-white text-black`}
       >
-        <button>Add an article</button>
-        <button>My Articles</button>
+        <Link href="/add" onClick={() => setIsOpen(false)}>
+          Add an article
+        </Link>
+
+        <Link href="/my-articles" onClick={() => setIsOpen(false)}>
+          My articles
+        </Link>
         <button onClick={handleLogOut}>Log Out</button>
       </div>
     </div>
