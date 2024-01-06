@@ -1,16 +1,16 @@
 input {
-  @apply border-2 border-white border-solid bg-c_gray p-3 outline-none;
+  @apply border-b-2 border-white border-solid bg-c_gray p-3 focus:outline-none;
 }
 label {
   /* @apply */
 }
 
 form {
-  @apply flex flex-col w-2/5 mx-auto border-2 border-solid border-white p-20 gap-4;
+  @apply flex flex-col sm:w-3/5 lg:w-2/5 absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] border-2 border-solid border-white px-6 py-10 md:p-20 gap-4 block;
 }
 
 .submit_btn {
-  @apply border-2 border-solid border-white p-3 mt-8;
+  @apply border-2 border-solid border-white p-3;
 }
 
 .submit_btn:hover {

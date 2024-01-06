@@ -22,7 +22,7 @@ const Search = ({ placeholder }) => {
   return (
     <div>
       <input
-        className="border-2 border-whie border-solid bg-c_gray py-2 px-4 outline-none text-white"
+        className="border-b-2 border-whie border-solid bg-c_gray py-2 px-4 outline-none text-white"
         type="text"
         placeholder={placeholder}
         onChange={(e) => handleSearch(e.target.value)}

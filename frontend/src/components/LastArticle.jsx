@@ -1,5 +1,4 @@
 import Image from "next/image";
-import heroImg from "@../public/hero.jpg";
 import { unstable_noStore as noStore } from "next/cache";
 import formatDate from "@utils/formatDate";
 
@@ -18,7 +17,7 @@ const LastArticle = async () => {
 
   return (
     <div className="mb-20">
-      <div className="w-full h-[35vh] md:h-[60vh] lg:h-[80vh] relative mb-14">
+      <div className="w-full h-[35vh] md:h-[60vh] lg:h-[80vh] relative mb-14 z-0">
         <Image
           src={`${process.env.BACKEND_URL}/${image}`}
           fill
