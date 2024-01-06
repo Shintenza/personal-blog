@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-c_gray text-white box-border;
+}
+
+.page_padding {
+  @apply px-[10px] sm:px-[60px] lg:px-[120px];
+}

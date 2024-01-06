@@ -1,0 +1,18 @@
+input {
+  @apply border-2 border-white border-solid bg-c_gray p-3 outline-none;
+}
+label {
+  /* @apply */
+}
+
+form {
+  @apply flex flex-col w-2/5 mx-auto border-2 border-solid border-white p-20 gap-4;
+}
+
+.submit_btn {
+  @apply border-2 border-solid border-white p-3 mt-8;
+}
+
+.submit_btn:hover {
+  @apply bg-white text-black;
+}
