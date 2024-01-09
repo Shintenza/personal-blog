@@ -24,8 +24,9 @@ const Page = async ({ params }) => {
     notFound();
   }
   return (
-    <div className="page_padding">
+    <div>
       <article>
+        <h1 className="text-8xl mt-10 mb-4 font-bold">{article.title}</h1>
         <div className="h-[80vh] relative">
           <Image
             src={`${process.env.BACKEND_URL}/${article.image}`}
@@ -35,8 +36,9 @@ const Page = async ({ params }) => {
           />
         </div>
 
-        <h1 className="text-6xl mt-10 mb-4">{article.title}</h1>
-        <span className="block font-light mb-6">{formatDate(article.dateAdded)}</span>
+        <span className="block font-light my-6">
+          {formatDate(article.dateAdded)}
+        </span>
         <p className="mb-10 leading-7">{article.content}</p>
       </article>
     </div>

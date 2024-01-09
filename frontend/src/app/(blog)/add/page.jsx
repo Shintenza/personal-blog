@@ -2,7 +2,7 @@ import ArticleForm from "@components/ArticleForm";
 
 const Page = () => {
   return (
-    <div className="page_padding">
+    <div>
       <ArticleForm />
     </div>
   );

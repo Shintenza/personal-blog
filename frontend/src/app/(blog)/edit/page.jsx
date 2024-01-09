@@ -29,7 +29,7 @@ const Page = async ({ searchParams }) => {
     );
   }
   return (
-    <div className="page_padding">
+    <div>
       <ArticleForm existingArticle={article} />
     </div>
   );

@@ -20,7 +20,7 @@ const LastArticle = async () => {
   return (
     <Link href={`/article/${_id}`}>
       <div className="mb-20">
-        <div className="w-full h-[35vh] md:h-[60vh] lg:h-[80vh] relative mb-14 z-0">
+        <div className="w-full h-[35vh] md:h-[60vh] lg:h-[80vh] relative mb-14 z-0 img">
           <Image
             src={`${process.env.BACKEND_URL}/${image}`}
             fill

@@ -60,9 +60,17 @@ const Header = () => {
 
   return (
     <nav>
-      <div className="page_padding flex justify-between items-center mt-8 mb-10">
+      <div className="flex justify-between items-center mt-8 mb-10">
         <Link href="/">
-          <h1 className="text-9xl font-bold">Blog.</h1>
+          <h1
+            className={`${pathname.split("/").length >= 2 &&
+                pathname.split("/")[1] != "article"
+                ? "text-9xl"
+                : "text-4xl"
+              } font-bold`}
+          >
+            Blog.
+          </h1>
         </Link>
         <div className="">
           <ul className="peer gap-4 hidden active md:flex items-center">

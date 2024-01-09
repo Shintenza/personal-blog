@@ -27,7 +27,7 @@ const Home = async ({ searchParams }) => {
   );
 
   return (
-    <main className="page_padding">
+    <main>
       {currentPage == 1 && <LastArticle />}
       <div className="flex justify-between items-center mb-16">
         <h1 className="text-6xl font-bold" id="header">
