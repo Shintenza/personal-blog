@@ -25,6 +25,7 @@ const Home = async ({ searchParams }) => {
     currentPage,
     searchQuery,
   );
+
   return (
     <main className="page_padding">
       <LastArticle />

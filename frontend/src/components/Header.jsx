@@ -20,6 +20,7 @@ const Header = () => {
         className={`${pathname == "/" ? styles.active : ""} ${styles.link
           } text-${color}`}
         key={0}
+        onClick={() => setIsVisible(false)}
       >
         Home
       </Link>,
@@ -28,6 +29,7 @@ const Header = () => {
         className={`${pathname == "/about" ? styles.active : ""} ${styles.link
           } text-${color}`}
         key={1}
+        onClick={() => setIsVisible(false)}
       >
         About me
       </Link>,
@@ -36,6 +38,7 @@ const Header = () => {
         className={`${pathname == "/contact" ? styles.active : ""} ${styles.link
           } text-${color}`}
         key={2}
+        onClick={() => setIsVisible(false)}
       >
         Contact
       </Link>,
@@ -96,10 +99,18 @@ const Header = () => {
 
               {userData ? (
                 <>
-                  <Link href="/add" className="text-black">
+                  <Link
+                    href="/add"
+                    className="text-black"
+                    onClick={() => setIsVisible(false)}
+                  >
                     Add an article
                   </Link>
-                  <Link href="/" className="text-black">
+                  <Link
+                    href="/my-articles"
+                    className="text-black"
+                    onClick={() => setIsVisible(false)}
+                  >
                     My Articles
                   </Link>
                   <button

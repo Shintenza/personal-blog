@@ -7,15 +7,23 @@ import style from "@styles/ArticleForm.module.css";
 import { IoImageOutline } from "react-icons/io5";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { revalidateArticle } from "@utils/revalidation";
 
-const ArticleForm = () => {
+const ArticleForm = ({ existingArticle }) => {
   const imageInputRef = useRef(null);
   const { replace } = useRouter();
 
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(
+    existingArticle ? existingArticle.title : "",
+  );
   const [image, setImage] = useState(null);
-  const [description, setDescription] = useState("");
-  const [content, setContent] = useState("");
+  const [description, setDescription] = useState(
+    existingArticle ? existingArticle.description : "",
+  );
+  const [content, setContent] = useState(
+    existingArticle ? existingArticle.content : "",
+  );
   const [finalMsg, setFinalMsg] = useState("");
   const [isError, setIsError] = useState(false);
 
@@ -31,8 +39,14 @@ const ArticleForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!checkTitle() || !checkContent() || !checkDescription()) {
+    if (
+      !checkTitle() ||
+      !checkContent() ||
+      !checkDescription() ||
+      (!existingArticle && !image)
+    ) {
       setIsError(true);
+      return;
     }
     const formData = new FormData();
 
@@ -42,19 +56,33 @@ const ArticleForm = () => {
     formData.append("content", content);
 
     try {
-      const response = await fetch(`${BACKEND_URL}/article/add`, {
-        method: "POST",
-        body: formData,
-        credentials: "include",
-      });
+      let response = null;
+      if (existingArticle) {
+        response = await fetch(
+          `${BACKEND_URL}/article/update/${existingArticle._id}`,
+          {
+            method: "PUT",
+            body: formData,
+            credentials: "include",
+          },
+        );
+      } else {
+        response = await fetch(`${BACKEND_URL}/article/add`, {
+          method: "POST",
+          body: formData,
+          credentials: "include",
+        });
+      }
 
       if (response.status == 201) {
+        if (existingArticle) revalidateArticle(existingArticle._id);
         const responseBody = await response.json();
         replace(`/article/${responseBody._id}`);
       } else {
         setFinalMsg("Failed to add an article");
       }
     } catch (error) {
+      console.log(error);
       setFinalMsg("server error please try again later");
     }
   };
@@ -94,9 +122,13 @@ const ArticleForm = () => {
           }}
           className="bg-c_gray_lighter min-h-[60vh] relative"
         >
-          {image ? (
+          {image || existingArticle ? (
             <Image
-              src={URL.createObjectURL(image)}
+              src={
+                existingArticle
+                  ? `${BACKEND_URL}/${existingArticle.image}`
+                  : URL.createObjectURL(image)
+              }
               fill
               alt="selected image file"
               className="object-cover"
@@ -141,7 +173,9 @@ const ArticleForm = () => {
           </p>
         )}
 
-        {finalMsg.length > 0 && <p className="text-red-400 underline">{finalMsg}</p>}
+        {finalMsg.length > 0 && (
+          <p className="text-red-400 underline">{finalMsg}</p>
+        )}
 
         <button
           className="border-2 text-white border-white mb-10 border-solid py-2 px-6 hover:bg-white hover:text-black"
