@@ -28,14 +28,20 @@ const Home = async ({ searchParams }) => {
 
   return (
     <main className="page_padding">
-      <LastArticle />
+      {currentPage == 1 && <LastArticle />}
       <div className="flex justify-between items-center mb-16">
         <h1 className="text-6xl font-bold" id="header">
           More stories...
         </h1>
         <Search placeholder="Search for an article..." />
       </div>
-      <ArticleGrid articles={articles} />
+      {articles.length > 0 ? (
+        <ArticleGrid articles={articles} />
+      ) : (
+        <div className="min-h-[30vh]">
+          <h1 className="text-xl font-light">No articles found :(</h1>
+        </div>
+      )}
       <Pagination totalPages={totalNumberOfPages} />
     </main>
   );

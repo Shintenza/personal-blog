@@ -19,14 +19,19 @@ const Pagination = ({ totalPages }) => {
     const createElement = (label, key, page = null) => {
       if (!page) {
         return (
-          <button className="mx-2 bg-w_gray" key={key}>
+          <button
+            className="h-10 w-10 mx-2 border-2 border-solid border-white hover:bg-white hover:text-black rounded-full"
+            key={key}
+          >
             {label}
           </button>
         );
       }
       return (
         <button
-          className={`${currentPage == label ? "bg-w_orange" : "bg-w_gray"
+          className={`${currentPage == label
+              ? "bg-white text-black"
+              : "border-2 border-solid border-white hover:bg-white hover:text-black"
             } mx-2 h-10 w-10 rounded-full shadow-md`}
           key={key}
           onClick={() => handleClick(page)}
@@ -72,7 +77,7 @@ const Pagination = ({ totalPages }) => {
   };
 
   return (
-    <div className="w-full text-center mt-12">
+    <div className="w-full text-center mt-12 mb-12">
       <div className="inline-block mx-auto">{returnPaginationItems()}</div>
     </div>
   );
