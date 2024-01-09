@@ -6,7 +6,8 @@ import {
   deleteArticle,
   getArticles,
   getLastArticle,
-  getArticle
+  getArticle,
+  getUserArticles,
 } from "../controllers/articleController.js";
 import articleAuth from "../middleware/articleAuth.js";
 import multer from "multer";
@@ -32,10 +33,10 @@ router.put(
   putUpdateArticle,
 );
 router.delete("/delete/:id", articleAuth, deleteArticle);
-router.get("/", getArticles);
+
+router.get("/user-articles", articleAuth, getUserArticles);
 router.get("/last", getLastArticle);
-router.get("/get/:id", getArticle)
-
-
+router.get("/get/:id", getArticle);
+router.get("/", getArticles);
 
 export default router;

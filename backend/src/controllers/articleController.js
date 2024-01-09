@@ -143,9 +143,39 @@ const getArticle = asyncHandler(async (req, res) => {
     throw new Error("missing article id");
   }
   try {
-    const article = await Article.findById(articleId).select("-description");
+    const article = await Article.findById(articleId);
     res.status(200);
     res.json(article);
+  } catch (error) {
+    handleDbErrors(error, res);
+  }
+});
+
+const PAGE_SIZE_LIST = 8;
+
+const getUserArticles = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+
+  if (!userId) {
+    res.status(401);
+    throw new Error("you are not authorized");
+  }
+
+  const page = req.query.page ? Number(req.query.page) : 1;
+  const skip = (page - 1) * PAGE_SIZE_LIST;
+
+  try {
+    const articles = await Article.find({
+      author: new mongoose.Types.ObjectId(userId),
+    })
+      .sort({ dateAdded: -1 })
+      .skip(skip)
+      .limit(PAGE_SIZE)
+      .lean();
+    const total = await Article.countDocuments();
+
+    res.status(200);
+    res.json({ articles, total: Math.ceil(total / PAGE_SIZE_LIST), page });
   } catch (error) {
     handleDbErrors(error, res);
   }
@@ -158,4 +188,5 @@ export {
   getArticles,
   getLastArticle,
   getArticle,
+  getUserArticles,
 };
