@@ -1,7 +1,6 @@
 "use client";
 import style from "@styles/ContactForm.module.css";
 import { useState } from "react";
-import sendEmail from "@utils/sendMail";
 import PageSpinner from "./PageSpinner";
 
 const DEST_ADDRESS = "kam.kuziora@gmail.com";
