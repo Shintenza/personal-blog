@@ -39,7 +39,7 @@ const Page = async ({ params }) => {
         <span className="block font-light my-6">
           {formatDate(article.dateAdded)}
         </span>
-        <p className="mb-10 leading-7">{article.content}</p>
+        <p className="mb-10 leading-7 whitespace-pre-line">{article.content}</p>
       </article>
     </div>
   );

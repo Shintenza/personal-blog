@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 const BACKEND_URL = "http://localhost:8080";
 
 const ArticleListCard = ({ image, title, description, dateAdded, id }) => {
-  const searchParams = useSearchParams();
   const router = useRouter();
 
   const deleteArticle = async () => {
@@ -22,8 +21,8 @@ const ArticleListCard = ({ image, title, description, dateAdded, id }) => {
   };
 
   return (
-    <div className="flex justify-between gap-4 min-h-[30vh]">
-      <div className="w-1/3 relative hidden md:block">
+    <div className="md:grid grid-cols-3 justify-between gap-4 min-h-[30vh] w-full">
+      <div className="md:col-span-1 relative hidden md:block">
         <Image
           src={`${BACKEND_URL}/${image}`}
           fill
@@ -31,8 +30,8 @@ const ArticleListCard = ({ image, title, description, dateAdded, id }) => {
           className="object-cover"
         />
       </div>
-      <div className="flex-1 flex flex-col sm:flex-row justify-between gap-8">
-        <div>
+      <div className="md:col-span-2 flex flex-col md:flex-row justify-between gap-8">
+        <div className="md:w-4/5">
           <h1 className="text-3xl font-bold mb-1">{title}</h1>
           <span className="block font-light mb-1">{formatDate(dateAdded)}</span>
           <p className="text-justify">{description}</p>

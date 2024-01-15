@@ -6,6 +6,7 @@ const articleSchema = mongoose.Schema({
     require: true,
     unique: true,
     minLength: [5, "article title cannot be shorter than 5 characters"],
+    maxLength: [80, "article title cannot be longer than 80 characters"]
   },
   content: {
     type: String,
@@ -19,6 +20,7 @@ const articleSchema = mongoose.Schema({
   description: {
     type: String,
     minLength: [5, "article description cannot be shorter than 5 characters"],
+    maxLength: [400, "article description cannot be longer than 400 characters"]
   },
   author: {
     type: Schema.Types.ObjectId,

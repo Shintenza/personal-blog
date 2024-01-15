@@ -27,9 +27,10 @@ const ArticleForm = ({ existingArticle }) => {
   const [finalMsg, setFinalMsg] = useState("");
   const [isError, setIsError] = useState(false);
 
-  const checkTitle = () => title.length >= 5 && title.length <= 42;
+  const checkTitle = () => title.length >= 5 && title.length <= 80;
   const checkContent = () => content.length >= 10;
-  const checkDescription = () => description.length >= 5;
+  const checkDescription = () =>
+    description.length >= 5 && description.length <= 400;
 
   const handleImageChange = (e) => {
     const selectedFile = e.target.files && e.target.files[0];
@@ -125,7 +126,7 @@ const ArticleForm = ({ existingArticle }) => {
           {image || existingArticle ? (
             <Image
               src={
-                existingArticle
+                existingArticle && !image
                   ? `${BACKEND_URL}/${existingArticle.image}`
                   : URL.createObjectURL(image)
               }
@@ -137,7 +138,7 @@ const ArticleForm = ({ existingArticle }) => {
             <IoImageOutline className="m-auto text-8xl" />
           )}
         </button>
-        {isError && !image && (
+        {isError && !image && !existingArticle && (
           <p className="text-red-400">You have to include an image</p>
         )}
         <label htmlFor="description">Short article description</label>
@@ -153,7 +154,7 @@ const ArticleForm = ({ existingArticle }) => {
         ></textarea>
         {isError && !checkDescription() && (
           <p className="text-red-400">
-            The description cannot be shorter than 5 characters
+            The description cannot be shorter than 5 characters and longer that 400
           </p>
         )}
         <label htmlFor="content">Content</label>

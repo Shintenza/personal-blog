@@ -38,13 +38,21 @@ The UI is simple yet modern, with responsive design as a key focus. Articles are
 ## Getting started
 1. Create `.env` files in both backend and frontend dir and fill them in using provided `.env.example` files
 2. Install required dependencies in both (backend and frontend) directories using your favourite package manager:
-> npm install
+```sh
+npm install
+```
 3. Run Express server (in backend dir) using `dev` script from `package.json`:
-> npm run dev
+```sh
+npm run dev
+```
 4. Build production version of the frontend using (in frontend dir):
-> npm run build
+```sh
+npm run build
+```
 5. Run production build of the frontent:
-> npm run start
+```sh
+npm run start
+```
 
 ## Licence 
 This project is licensed under the AGPL3 License - see the LICENSE.md file for details

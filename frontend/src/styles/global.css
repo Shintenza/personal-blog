@@ -9,3 +9,7 @@ body {
 .page_padding {
   @apply px-[10px] sm:px-[60px] lg:px-[120px];
 }
+
+* {
+  overflow-wrap: break-word;
+}

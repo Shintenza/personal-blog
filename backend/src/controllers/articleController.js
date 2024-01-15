@@ -53,7 +53,7 @@ const putUpdateArticle = asyncHandler(async (req, res) => {
   };
 
   if (imageFile) {
-    newData.image = imageFile.path;
+    newData.image = imageFile.filename;
   }
 
   let updatedArticle = null;
@@ -115,7 +115,7 @@ const getArticles = asyncHandler(async (req, res) => {
         model: User,
       })
       .lean();
-    const total = await Article.countDocuments();
+    const total = (await Article.countDocuments()) - 1;
 
     res.status(200);
     res.json({ articles, total: Math.ceil(total / PAGE_SIZE), page });
@@ -170,7 +170,7 @@ const getUserArticles = asyncHandler(async (req, res) => {
     })
       .sort({ dateAdded: -1 })
       .skip(skip)
-      .limit(PAGE_SIZE)
+      .limit(PAGE_SIZE_LIST)
       .lean();
     const total = await Article.countDocuments();
 

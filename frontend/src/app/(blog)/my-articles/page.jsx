@@ -31,7 +31,7 @@ const Page = async ({ searchParams }) => {
   const { articles, total } = await fetchUserArticles(currentPage);
 
   return (
-    <div className="page_padding">
+    <div>
       <h1 className="text-6xl mb-8">Your articles</h1>
       <ArticleList articles={articles} />
       <Pagination totalPages={total}/>
