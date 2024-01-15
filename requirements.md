@@ -1,10 +1,10 @@
 # Wymagania techniczne
 ## Wykorzystanie Node.js i Express.js
 1. Struktura aplikacji:
-    - w przypadku backendu podział na osobne foldery dla \textit{middleware, routera, controllera, utils} czy dla \textit{modeli}
-    - struktura dla frontendu jest narzucona przez Next jeśli chodzi o folder \textit{app}, dodatkowo podział na osobny folder dla komponentów, styli czy użytecznych funkcji
-2. Routing i middleware: patrz folder \textit{routes} i \textit{middleware}
-3. Obsługa błędów: zapytania robione zarówno przez backend, jak i frontend używają konstrukcji \textit{try/catch}
+    - w przypadku backendu podział na osobne foldery dla *middleware*, *routera*, *controllera*, *utils* czy dla *modeli*
+    - struktura dla frontendu jest narzucona przez Next jeśli chodzi o folder *app*, dodatkowo podział na osobny folder dla komponentów, styli czy użytecznych funkcji
+2. Routing i middleware: patrz folder *routes* i *middleware*
+3. Obsługa błędów: zapytania robione zarówno przez backend, jak i frontend używają konstrukcji *try/catch*
 4. Integracja z Node.js: serwer zapisuje pliki przesyłane przez usera na dysku do czego są wykorzystywane wbudowane w Node.js funkcje (patrz np. `createUploadsDir.js`)
 5. Zgodność z dokumentacją: kod był pisany zgodnie z dobrymi praktykami, a także samą dokumentacją
 
